@@ -2,7 +2,7 @@ package cromwell.pipeline.datastorage.dao
 
 import cromwell.pipeline.datastorage.Profile
 import cromwell.pipeline.datastorage.dao.entry.UserEntry
-import cromwell.pipeline.datastorage.dto.{Project, ProjectId, UserId}
+import cromwell.pipeline.datastorage.dto.{ Project, ProjectId, UserId }
 
 import scala.concurrent.Future
 
@@ -38,11 +38,10 @@ trait ProjectEntry {
   def deactivateProjectByIdAction(projectId: ProjectId) =
     projects.filter(_.projectId === projectId).map(_.active).update(false)
 
-  def updateProjectAction(updatedProject: Project) = {
+  def updateProjectAction(updatedProject: Project) =
     projects
       .filter(_.projectId === updatedProject.projectId)
       .map(project => (project.name, project.repository))
       .update((updatedProject.name, updatedProject.repository))
-  }
 
 }
